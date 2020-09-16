@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+
+  web-3:
+    build:
+      context: .
+      dockerfile: nginx-php70.dockerfile
+      args:
+        DEV_DOMAIN: ${DEV_DOMAIN}
+        NGINX_SSL: ${NGINX_SSL}
+        DB_NAME: ${DB_NAME}
+        DB_USER: ${DB_USER}
+        DB_PASS: ${DB_PASS}
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+      - 3306:3306
+    volumes:
+      - './webroot:/var/www/html'
